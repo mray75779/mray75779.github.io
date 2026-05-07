@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ভিডিও দেখুন - ইনকাম করুন</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Teko:wght@500;700&display=swap" rel="stylesheet"/>
+
+  <!-- ✅ Monetag Verification -->
+  <meta name="monetag" content="c16de700741b0463fd1cd09e33e9575a">
+
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --card: #1a1a26;
+      --accent: #ff6b00;
+      --accent2: #ffaa00;
+      --text: #f0f0f8;
+      --muted: #888899;
+      --border: #2a2a3a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Hind Siliguri', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── TOP BANNER AD ZONE ── */
+    .ad-banner {
+      background: linear-gradient(90deg, #1a1a26, #22223a);
+      border-bottom: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      min-height: 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ad-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,107,0,.03) 10px, rgba(255,107,0,.03) 20px);
+    }
+    .ad-label {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: absolute;
+      top: 4px; left: 8px;
+    }
+    .ad-placeholder {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .ad-placeholder strong { color: var(--accent); }
+
+    /* ── HEADER ── */
+    header {
+      padding: 20px 24px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Teko', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+    .logo span { color: var(--accent2); }
+    .tagline {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: -6px;
+    }
+    .earn-badge {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 30px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(255,107,0,.4); }
+      50% { box-shadow: 0 0 0 10px rgba(255,107,0,0); }
+    }
+
+    /* ── ADD VIDEO SECTION ── */
+    .add-section {
+      margin: 20px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .add-section h2 {
+      font-family: 'Teko', sans-serif;
+      font-size: 22px;
+      color: var(--accent2);
+      margin-bottom: 14px;
+    }
+    .input-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .input-row input {
+      flex: 1;
+      min-width: 200px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-family: 'Hind Siliguri', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .input-row input:focus { border-color: var(--accent); }
+    .input-row input::placeholder { color: var(--muted); }
+    .btn-add {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-family: 'Hind Siliguri', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-add:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,0,.4); }
+
+    /* ── SIDEBAR + GRID LAYOUT ── */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 16px;
+      padding: 0 16px 24px;
+    }
+    @media(max-width:700px) {
+      .main-layout { grid-template-columns: 1fr; }
+    }
+
+    /* ── VIDEO GRID ── */
+    .video-grid { display: flex; flex-direction: column; gap: 14px; }
+    .video-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .video-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,.5); }
+    .video-card iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+      display: block;
+    }
+    .video-info {
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .video-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      flex: 1;
+    }
+    .btn-delete {
+      background: rgba(255,50,50,.15);
+      border: 1px solid rgba(255,50,50,.3);
+      color: #ff6666;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-delete:hover { background: rgba(255,50,50,.3); }
+
+    /* AD between videos */
+    .ad-between {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 14px; }
+    .sidebar-ad {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px;
+    }
+    .sidebar-ad .ad-icon { font-size: 36px; opacity: .4; }
+
+    .stats-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .stats-box h3 {
+      font-family: 'Teko', sans-serif;
+      font-size: 20px;
+      color: var(--accent2);
+      margin-bottom: 14px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-val { color: var(--accent); font-weight: 700; }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+    .empty-state .big-icon { font-size: 60px; margin-bottom: 12px; opacity: .4; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BANNER AD -->
+<div class="ad-banner">
+  <span class="ad-label">বিজ্ঞাপন</span>
+  <!-- ✅ Monetag Banner Ad Code এখানে বসান -->
+  <div class="ad-placeholder">
+    <strong>⚡ Monetag Banner Ad</strong><br>
+    আপনার Monetag Banner Code এখানে paste করুন
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="logo">ভিডিও<span>প্লেক্স</span></div>
+    <div class="tagline">দেখুন • শেয়ার করুন • ইনকাম করুন</div>
+  </div>
+  <div class="earn-badge">💰 ইনকাম চালু</div>
+</header>
+
+<!-- ADD VIDEO -->
+<div class="add-section">
+  <h2>📹 নতুন ভিডিও যোগ করুন</h2>
+  <div class="input-row">
+    <input type="text" id="videoTitle" placeholder="ভিডিওর শিরোনাম লিখুন..." />
+    <input type="text" id="videoUrl" placeholder="YouTube লিংক দিন (যেমন: https://youtu.be/xxxxx)" />
+    <button class="btn-add" onclick="addVideo()">➕ যোগ করুন</button>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+  <!-- VIDEO LIST -->
+  <div class="video-grid" id="videoGrid">
+    <div class="empty-state" id="emptyState">
+      <div class="big-icon">🎬</div>
+      <p>এখনো কোনো ভিডিও নেই<br>উপরে লিংক দিয়ে ভিডিও যোগ করুন!</p>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <!-- Sidebar Ad 1 -->
+    <div class="sidebar-ad">
+      <div class="ad-icon">📢</div>
+      <div class="ad-placeholder" style="text-align:center">
+        <strong style="color:var(--accent)">Monetag Sidebar Ad</strong><br>
+        <small style="color:var(--muted)">300x250 বিজ্ঞাপন এখানে বসান</small>
+      </div>
+      <!-- ✅ Monetag Sidebar Code এখানে -->
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-box">
+      <h3>📊 আজকের পরিসংখ্যান</h3>
+      <div class="stat-row"><span>মোট ভিডিও</span><span class="stat-val" id="totalVideos">0</span></div>
+      <div class="stat-row"><span>মোট ভিউ</span><span class="stat-val" id="totalViews">0</span></div>
+      <div class="stat-row"><span>বিজ্ঞাপন দেখা</span><span class="stat-val" id="adViews">0</span></div>
+      <div class="stat-row"><span>আনুমানিক ইনকাম</span><span class="stat-val" id="estEarn">$0.00</span></div>
+    </div>
+
+    <!-- Sidebar Ad 2 -->
+    <div class="sidebar-ad">
+      <div class="ad-icon">📢</div>
+      <div class="ad-placeholder" style="text-align:center">
+        <strong style="color:var(--accent)">Monetag Sticky Ad</strong><br>
+        <small style="color:var(--muted)">এখানে আরেকটি বিজ্ঞাপন বসান</small>
+      </div>
+      <!-- ✅ আরেকটি Monetag Ad Code এখানে -->
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 ভিডিওপ্লেক্স — বিজ্ঞাপন দেখে ইনকাম করুন 💸 | Powered by Monetag
+</footer>
+
+<script>
+  let videos = JSON.parse(localStorage.getItem('vp_videos') || '[]');
+  let adCount = parseInt(localStorage.getItem('vp_adviews') || '0');
+  let viewCount = parseInt(localStorage.getItem('vp_views') || '0');
+
+  function getYouTubeId(url) {
+    const patterns = [
+      /youtu\.be\/([^?&]+)/,
+      /youtube\.com\/watch\?v=([^&]+)/,
+      /youtube\.com\/embed\/([^?&]+)/,
+      /youtube\.com\/shorts\/([^?&]+)/,
+    ];
+    for (const p of patterns) {
+      const m = url.match(p);
+      if (m) return m[1];
+    }
+    return null;
+  }
+
+  function addVideo() {
+    const title = document.getElementById('videoTitle').value.trim();
+    const url = document.getElementById('videoUrl').value.trim();
+    if (!title || !url) { alert('শিরোনাম এবং লিংক দুটোই দিন!'); return; }
+    const ytId = getYouTubeId(url);
+    if (!ytId) { alert('সঠিক YouTube লিংক দিন!'); return; }
+    videos.unshift({ id: Date.now(), title, ytId });
+    localStorage.setItem('vp_videos', JSON.stringify(videos));
+    document.getElementById('videoTitle').value = '';
+    document.getElementById('videoUrl').value = '';
+    renderVideos();
+  }
+
+  function deleteVideo(id) {
+    videos = videos.filter(v => v.id !== id);
+    localStorage.setItem('vp_videos', JSON.stringify(videos));
+    renderVideos();
+  }
+
+  function renderVideos() {
+    const grid = document.getElementById('videoGrid');
+    const empty = document.getElementById('emptyState');
+    document.getElementById('totalVideos').textContent = videos.length;
+
+    if (videos.length === 0) {
+      grid.innerHTML = '';
+      grid.appendChild(empty);
+      return;
+    }
+
+    let html = '';
+    videos.forEach((v, i) => {
+      html += `
+        <div class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/${v.ytId}?rel=0&modestbranding=1"
+            allowfullscreen
+            onload="countView()"
+            title="${v.title}">
+          </iframe>
+          <div class="video-info">
+            <div class="video-title">${v.title}</div>
+            <button class="btn-delete" onclick="deleteVideo(${v.id})">🗑️ মুছুন</button>
+          </div>
+        </div>`;
+      // Ad after every 2 videos
+      if ((i + 1) % 2 === 0) {
+        html += `
+          <div class="ad-between">
+            <div class="ad-placeholder">
+              <strong style="color:var(--accent)">📢 Monetag In-Content Ad</strong><br>
+              <small style="color:var(--muted)">এখানে আপনার in-content বিজ্ঞাপন বসান</small>
+            </div>
+            <!-- ✅ Monetag In-Content Ad Code এখানে -->
+          </div>`;
+      }
+    });
+
+    grid.innerHTML = html;
+    updateStats();
+  }
+
+  function countView() {
+    viewCount++;
+    adCount++;
+    localStorage.setItem('vp_views', viewCount);
+    localStorage.setItem('vp_adviews', adCount);
+    updateStats();
+  }
+
+  function updateStats() {
+    document.getElementById('totalViews').textContent = viewCount;
+    document.getElementById('adViews').textContent = adCount;
+    document.getElementById('estEarn').textContent = '$' + (adCount * 0.001).toFixed(3);
+  }
+
+  // Init
+  renderVideos();
+  updateStats();
+</script>
+</body>
+</html>
